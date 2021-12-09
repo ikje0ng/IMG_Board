@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>post</title>
+</head>
+<body>
+
+  <div class="w-50" style="margin:100px auto;">
+    <h2>UPLOAD</h2>
+  <!-- 파일업로드에선 무조건 post방식으로 해줘야 함-->
+  <!-- multipart : 파일 여러개 전달할 때 사용 / 여러 파트로 나눠서 전달하게끔 하는 방식-->
+    <form method="post" action="/Imgupload.do" enctype="multipart/form-data">
+      <input name="subject" placeholder="제목 입력" class="form-control mb-3">
+      <input type="file" name="fileform" class="form-control mb-3">
+      <label class="mb-3">주석</label>
+      <textarea name="content" class="form-control mb-3"></textarea>
+      <input type="submit" value="전송" class="form-control mb-3 btn-primary">
+    </form>
+  </div>
+</body>
+</html>

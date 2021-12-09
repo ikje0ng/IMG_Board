@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+<script>
+   var inum = [[ ${board.num} ]]
+
+    function replypost(){
+        $.ajax({
+            url : '/Imgboard/replypost.do',
+            type : 'POST',
+            data : { 'rcontent':$('#rcontent').val(),'inum':inum},
+            datatype : 'json',
+            success : function(result){
+                alert('성공');
+                <!--입력하고 나서 인풋에 텍스트 비워주는 작업-->
+                $('#rcontent').val('');
+            },
+            error : function(request,status,error){
+                console.log(request.status+' '+request.responseText+' '+error);
+            }
+
+        });
+
+    }
+</script>
+
+<th:block>
+  <div class="w-50" style="margin:100px auto;">
+    <div class="mb-3" style="padding:10px;border:1px solid gray;">
+      <h2 th:text="${board.subject}"></h2>
+    </div>
+    <div   class="mb-3" style="padding:10px;border:1px solid gray;">
+      <img th:src="@{/IMG/}+${board.folderpath}+@{/}+${board.filename}"></img>
+    </div>
+    <div   class="mb-3" style="padding:10px;border:1px solid gray;">
+      <p th:text="${board.content}"></p>
+    </div>
+    <div class="row m-3">
+      <div class="col-8">
+        <input type="text" name="rcontent" id="rcontent" class="form-control">
+      </div>
+      <div  class="col-4">
+        <a href="#" onclick="replypost()" class="btn btn-primary w-30">답글</a>&nbsp;
+        <a href="/Imgboard/list.do" class="btn btn-primary w-30">이전</a>
+      </div>
+    </div>
+  </div>
+</th:block>
+</body>
+</html>
