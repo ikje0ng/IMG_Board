@@ -16,13 +16,11 @@ import javax.persistence.*;
 public class IMGReply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rnum;
+    private Long rnum;          //답변글 프라이머리키
     @Column
-    private Long inum;
+    private Long inum;          //읽고 있는 게시물
     @Column
-    private String rcontent;
+    private String rcontent;    //댓글 내용
     @Column
-    private String regdate;
+    private String regdate;     //댓글 시간
 }
-
-

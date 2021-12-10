@@ -9,26 +9,39 @@
 </head>
 <body>
 <script>
+  <!--  현재 읽고 있는 게시물 inum에 담아줌 -->
    var inum = [[ ${board.num} ]]
 
     function replypost(){
         $.ajax({
             url : '/Imgboard/replypost.do',
             type : 'POST',
+            <!-- 답변 글에 대한 내용, 읽고 있는 게시물 값을 받아옴 -->
             data : { 'rcontent':$('#rcontent').val(),'inum':inum},
             datatype : 'json',
+            <!-- result array상태로 받아짐 -->
             success : function(result){
-                alert('성공');
-                <!--입력하고 나서 인풋에 텍스트 비워주는 작업-->
+                <!--val('') : 입력하고 나서 인풋에 텍스트 비워주는 작업-->
                 $('#rcontent').val('');
+                console.log(result);
+
+                <!-- result의 리스트 result의.rcontent 값 자식태그로 넣어줌-->
+                <!-- reply자식들을 찾아서 지우는 작업(댓글 전체 지우기)-->
+                <!-- 해주는 이유 : 기존의 태그들이 남아있음 (기존에 달려있는 것을 제거하고 새로 연결하는 작업) -->
+                $('#reply').empty();
+                for(i=0; i<result.length;i++){
+
+                <!-- id가 reply인 값을 찾아서 result의 rcontent추가-->
+                  $('#reply').append('<div>답변 : '+ result[i].rcontent +'</div>');
+                }
+
             },
             error : function(request,status,error){
                 console.log(request.status+' '+request.responseText+' '+error);
             }
-
         });
-
     }
+    replypost();
 </script>
 
 <th:block>
@@ -47,8 +60,13 @@
         <input type="text" name="rcontent" id="rcontent" class="form-control">
       </div>
       <div  class="col-4">
-        <a href="#" onclick="replypost()" class="btn btn-primary w-30">답글</a>&nbsp;
+        <a href="#" onclick="replypost()" class="btn btn-primary w-25">답글</a>&nbsp;
         <a href="/Imgboard/list.do" class="btn btn-primary w-30">이전</a>
+      </div>
+
+      <!-- 댓글이 달리는 위치 -->
+      <div id="reply" class="mb-3">
+
       </div>
     </div>
   </div>

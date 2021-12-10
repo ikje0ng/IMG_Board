@@ -20,6 +20,7 @@
             <!--{/ImgBoard/read.do(num=현재이미지게시물번호)}-->
             <a th:href="@{/Imgboard/read.do(num=${board.num})}">
                 <!--이미지 불러오는 경로 : /IMG/+폴더경로+/섬네일파일경로-->
+                <!-- IMG : 외부경로 WebMvcConfig에 설정해뒀음 / @{/} : 구분자가 없어서 넣어준 것임-->
             <img th:src="@{/IMG/}+${board.folderpath}+@{/}+${board.s_filename}" class="card-img-top mb-3" alt="...">
             </a>
             <div class="card-body">

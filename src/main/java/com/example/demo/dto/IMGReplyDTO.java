@@ -10,9 +10,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IMGReplyDTO {
-    //게시물 번호
+    //댓글 번호
     private Long rnum;
-    //댓글 어떤 게시글에 포함되어있는지
+    //이미지 번호
     private Long inum;
     //댓글 내용
     private String rcontent;

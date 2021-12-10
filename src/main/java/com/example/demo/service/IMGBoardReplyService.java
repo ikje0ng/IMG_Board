@@ -4,11 +4,15 @@ import com.example.demo.dto.IMGReplyDTO;
 import com.example.demo.entity.IMGReply;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface IMGBoardReplyService {
 
     //PostReply(IMGReplyDTO를 받아서 DB로 넘겨주겠다.)
     void PostReply(IMGReplyDTO dto);
+
+    ////현재 읽고 있는 게시물에 달린 모든 댓글 가져오기(읽고 있는 게시물번호를 인자로 받기)
+    List<IMGReply> getreplyList(Long inum);
 
     //외부로 전달 받은 DTO -> ENTITY로 변환
     default IMGReply dtoToEntity(IMGReplyDTO dto){
